@@ -1,92 +1,94 @@
-import type { Schema, Attribute } from '@strapi/strapi';
+import type { Schema, Struct } from '@strapi/strapi';
 
-export interface ElementsLink extends Schema.Component {
+export interface ElementsLink extends Struct.ComponentSchema {
   collectionName: 'components_elements_links';
   info: {
     displayName: 'Link';
   };
   attributes: {
-    text: Attribute.String;
-    href: Attribute.String;
-    isButton: Attribute.Boolean & Attribute.DefaultTo<false>;
-    isExternal: Attribute.Boolean & Attribute.DefaultTo<false>;
+    href: Schema.Attribute.String;
+    isButton: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    isExternal: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    text: Schema.Attribute.String;
   };
 }
 
-export interface ElementsListText extends Schema.Component {
+export interface ElementsListText extends Struct.ComponentSchema {
   collectionName: 'components_elements_list_texts';
   info: {
     displayName: 'List Text';
   };
   attributes: {
-    text: Attribute.String;
+    text: Schema.Attribute.String;
   };
 }
 
-export interface ElementsLogo extends Schema.Component {
+export interface ElementsLogo extends Struct.ComponentSchema {
   collectionName: 'components_elements_logos';
   info: {
-    displayName: 'Logo';
     description: '';
+    displayName: 'Logo';
   };
   attributes: {
-    image: Attribute.Media;
+    image: Schema.Attribute.Media<'images'>;
   };
 }
 
-export interface ElementsMetaData extends Schema.Component {
+export interface ElementsMetaData extends Struct.ComponentSchema {
   collectionName: 'components_elements_meta_data';
   info: {
     displayName: 'Meta Data';
   };
   attributes: {
-    metaTitle: Attribute.String;
-    metaDescription: Attribute.Text;
-    metaImage: Attribute.Media;
+    metaDescription: Schema.Attribute.Text;
+    metaImage: Schema.Attribute.Media<'images'>;
+    metaTitle: Schema.Attribute.String;
   };
 }
 
-export interface ElementsSocial extends Schema.Component {
+export interface ElementsSocial extends Struct.ComponentSchema {
   collectionName: 'components_elements_socials';
   info: {
     displayName: 'Social';
   };
   attributes: {
-    link: Attribute.String;
-    type: Attribute.Enumeration<['LINKEDIN', 'GITHUB', 'TWITTER', 'YOUTUBE']>;
+    link: Schema.Attribute.String;
+    type: Schema.Attribute.Enumeration<
+      ['LINKEDIN', 'GITHUB', 'TWITTER', 'YOUTUBE']
+    >;
   };
 }
 
-export interface LayoutHero extends Schema.Component {
+export interface LayoutHero extends Struct.ComponentSchema {
   collectionName: 'components_layout_heroes';
   info: {
     displayName: 'Hero';
   };
   attributes: {
-    heading: Attribute.String;
-    subHeading: Attribute.String;
-    text: Attribute.Text;
-    images: Attribute.Media;
-    features: Attribute.Component<'elements.list-text', true>;
+    features: Schema.Attribute.Component<'elements.list-text', true>;
+    heading: Schema.Attribute.String;
+    images: Schema.Attribute.Media<'images', true>;
+    subHeading: Schema.Attribute.String;
+    text: Schema.Attribute.Text;
   };
 }
 
-export interface LayoutNavigation extends Schema.Component {
+export interface LayoutNavigation extends Struct.ComponentSchema {
   collectionName: 'components_layout_navigations';
   info: {
-    displayName: 'Navigation';
     description: '';
+    displayName: 'Navigation';
   };
   attributes: {
-    name: Attribute.String;
-    location: Attribute.String;
-    navItem: Attribute.Component<'elements.link', true>;
+    location: Schema.Attribute.String;
+    name: Schema.Attribute.String;
+    navItem: Schema.Attribute.Component<'elements.link', true>;
   };
 }
 
-declare module '@strapi/types' {
-  export module Shared {
-    export interface Components {
+declare module '@strapi/strapi' {
+  export module Public {
+    export interface ComponentSchemas {
       'elements.link': ElementsLink;
       'elements.list-text': ElementsListText;
       'elements.logo': ElementsLogo;

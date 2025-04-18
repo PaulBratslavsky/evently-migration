@@ -11,10 +11,7 @@ export default factories.createCoreController(
       const slug = ctx.params.slug;
       const query = { filters: { slug: slug } };
 
-      const entities = await strapi.entityService.findMany(
-        "api::event.event",
-        query
-      );
+      const entities = await strapi.documents("api::event.event").findMany(query);
       
       const exists = entities.length > 0;  
       return { slugAlreadyExists: exists }

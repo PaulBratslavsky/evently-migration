@@ -39,11 +39,12 @@ export default async function RootLayout({
   return (
     <html lang="en" className="h-auto">
       <body className={inter.className}>
-        <AppProvider>
+        {children}
+        {/* <AppProvider>
           <Toaster />
           <Header data={global} />
           {children}
-        </AppProvider>
+        </AppProvider> */}
       </body>
     </html>
   );

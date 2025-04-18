@@ -38,10 +38,10 @@ export interface StrapiMEResponse {
   ok?: boolean;
   data?: {
     id: string;
-  }
+  };
   error?: {
     message: string;
-  }
+  };
 }
 
 export interface StrapiAuthActionResponse {
@@ -62,31 +62,25 @@ export interface StrapiEventDataCollection {
 
 export interface StrapiEventData {
   id: number;
-  attributes: {
-    title: string;
-    slug: string;
-    description: string;
-    location: string;
-    date: string;
-    time: string;
-    createdAt: string;
-    updatedAt: string;
-    publishedAt: string;
-    image: Image;
-    status: String;
-  };
+  title: string;
+  slug: string;
+  description: string;
+  location: string;
+  date: string;
+  time: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  image: Image;
+  status: string;
 }
 
 export interface Image {
-  data: {
-    id: number;
-    attributes: {
-      url: string;
-      alternativeText: null;
-    };
-  };
+  id: number;
+  documentId: string;
+  url: string;
+  alternativeText: string;
 }
-
 
 export interface EventFlattenProps {
   title: string;

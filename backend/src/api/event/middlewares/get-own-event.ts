@@ -9,11 +9,10 @@ module.exports = (config, { strapi }) => {
     if (!user) return ctx.unauthorized(`You can't access this entry`);
 
     if (entryId) {
-      const entry = await strapi.entityService.findOne(
-        "api::event.event",
-        entryId,
-        { populate: "*" }
-      );
+      const entry = await strapi.documents("api::event.event").findOne({
+        documentId: "__TODO__",
+        populate: "*"
+      });
       if (entry && entry.user.id !== userId) {
         return ctx.unauthorized(`You can't access this entry`);
       }
