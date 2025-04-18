@@ -23,7 +23,10 @@ module.exports = (config, { strapi }) => {
 
       // Check if the specific entry is public
       if (entryId) {
-        const entry = await strapi.entityService.findOne("api::event.event", entryId, { populate: "*" });
+        const entry = await strapi.documents("api::event.event").findOne({
+          documentId: "__TODO__",
+          populate: "*"
+        });
         if (entry && entry.status !== "PUBLIC") {
           return ctx.unauthorized(`You can't access this entry`);
         }
@@ -37,7 +40,10 @@ module.exports = (config, { strapi }) => {
 
       // Check if the user owns the specific entry
       if (entryId) {
-        const entry = await strapi.entityService.findOne("api::entry.entry", entryId, { populate: "*" });
+        const entry = await strapi.documents("api::entry.entry").findOne({
+          documentId: "__TODO__",
+          populate: "*"
+        });
         if (entry && entry.user.id !== userId) {
           return ctx.unauthorized(`You can't access this entry`);
         }
