@@ -1,4 +1,4 @@
-import type { Schema, Attribute } from '@strapi/strapi';
+import type { Attribute, Schema } from '@strapi/strapi';
 
 export interface ElementsLink extends Schema.Component {
   collectionName: 'components_elements_links';
@@ -6,10 +6,10 @@ export interface ElementsLink extends Schema.Component {
     displayName: 'Link';
   };
   attributes: {
-    text: Attribute.String;
     href: Attribute.String;
     isButton: Attribute.Boolean & Attribute.DefaultTo<false>;
     isExternal: Attribute.Boolean & Attribute.DefaultTo<false>;
+    text: Attribute.String;
   };
 }
 
@@ -26,11 +26,11 @@ export interface ElementsListText extends Schema.Component {
 export interface ElementsLogo extends Schema.Component {
   collectionName: 'components_elements_logos';
   info: {
-    displayName: 'Logo';
     description: '';
+    displayName: 'Logo';
   };
   attributes: {
-    image: Attribute.Media;
+    image: Attribute.Media<'images'>;
   };
 }
 
@@ -40,9 +40,9 @@ export interface ElementsMetaData extends Schema.Component {
     displayName: 'Meta Data';
   };
   attributes: {
-    metaTitle: Attribute.String;
     metaDescription: Attribute.Text;
-    metaImage: Attribute.Media;
+    metaImage: Attribute.Media<'images'>;
+    metaTitle: Attribute.String;
   };
 }
 
@@ -63,23 +63,23 @@ export interface LayoutHero extends Schema.Component {
     displayName: 'Hero';
   };
   attributes: {
+    features: Attribute.Component<'elements.list-text', true>;
     heading: Attribute.String;
+    images: Attribute.Media<'images', true>;
     subHeading: Attribute.String;
     text: Attribute.Text;
-    images: Attribute.Media;
-    features: Attribute.Component<'elements.list-text', true>;
   };
 }
 
 export interface LayoutNavigation extends Schema.Component {
   collectionName: 'components_layout_navigations';
   info: {
-    displayName: 'Navigation';
     description: '';
+    displayName: 'Navigation';
   };
   attributes: {
-    name: Attribute.String;
     location: Attribute.String;
+    name: Attribute.String;
     navItem: Attribute.Component<'elements.link', true>;
   };
 }
