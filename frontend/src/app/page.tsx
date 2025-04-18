@@ -40,7 +40,8 @@ export default async function Home() {
   const homePage =
     (await resHomePage?.json()) as APIResponse<"api::home-page.home-page">;
 
-  const sections = homePage.data.attributes.sections;
+  const sections = homePage?.data?.attributes?.sections;
+
   if (!sections) return <div>No Sections Found</div>;
 
   return (
@@ -51,12 +52,12 @@ export default async function Home() {
         )}
         <EventList eventsQuery={eventsQuery} />
       </div>
-      <CTASection
+      {/* <CTASection
         subHeading="join the event"
         heading="don't miss the opportunity, grab your tickets now!"
         text="Quam amet tristique adipisicing incididunt arcu, excepturi molestie turpis deserunt ducimus malesuada minus mauris veniam.excepturi molestie turpis deserunt ducimus malesuada minus mauris veniam."
         linkLabel="Choose your event"
-      />
+      /> */}
     </div>
   );
 }

@@ -1,6 +1,5 @@
 "use server";
 import qs from "qs";
-import { flattenAttributes } from "@/lib/utils";
 import { unstable_noStore as noStore } from "next/cache";
 
 const query = (slug: string) =>
@@ -20,9 +19,8 @@ const getEventsDetailsLoader = async (slug: string) => {
     const response: any = await fetch(url);
     const data = await response.json();
     const event = data.data[0];
-    const eventFlattened = flattenAttributes(event);
     if (response.ok && event) {
-      return { data: eventFlattened, ok: true };
+      return { data: event, ok: true };
     } else return { error: data.error, ok: false };
   } catch (error) {
     console.log(error);

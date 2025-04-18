@@ -16,7 +16,10 @@ export default async (policyContext, config, { strapi }) => {
   }
 
   const entryId = Number(policyContext.params.id);
-  const eventEntry = await strapi.entityService.findOne("api::event.event", entryId, { populate: "*" });
+  const eventEntry = await strapi.documents("api::event.event").findOne({
+    documentId: "__TODO__",
+    populate: "*"
+  });
 
   if (eventEntry && eventEntry.user.id !== user.id) {
     throw new PolicyError("You are not allowed to perform this action.", {
